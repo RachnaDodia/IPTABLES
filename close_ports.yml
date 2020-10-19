@@ -1,0 +1,10 @@
+---
+- name: configure ip tables
+  hosts: all
+  vars:
+   - portinput: "{{ port.split('\n') }}"
+  tasks:
+   - name: Set IP Tables rule to reject traffic on specified ports
+     command: iptables -A INPUT  -p tcp --dport {{ item }} -j REJECT
+     with_items:
+      - "{{ portinput }}"
