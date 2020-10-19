@@ -1,0 +1,14 @@
+---
+- name: configure ip tables
+  hosts: all
+  vars:
+   - portinput: "{{ port.split('\n') }}"
+  tasks:
+   - name: Delete IP Table rules on specified ports
+     command: iptables -D INPUT  -p tcp --dport {{ item }} -j REJECT
+     with_items:
+      - "{{ portinput }}"
+   - name: Open specified ports
+     command: iptables -A INPUT  -p tcp --dport {{ item }} -j ACCEPT
+     with_items:
+      - "{{ portinput }}"
