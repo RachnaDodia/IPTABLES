@@ -1,0 +1,6 @@
+---
+- name: Save IP Table Rules
+  hosts: all
+  tasks:
+   - name: Save IP Table Rules
+     command: iptables-save
