@@ -8,6 +8,7 @@
      command: iptables -D INPUT  -p tcp --dport {{ item }} -j REJECT
      with_items:
       - "{{ portinput }}"
+     ignore_errors: yes
    - name: Open specified ports
      command: iptables -A INPUT  -p tcp --dport {{ item }} -j ACCEPT
      with_items:
