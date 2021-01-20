@@ -4,8 +4,6 @@
   vars:
    - portinput: "{{ port.split('\n') }}"
   tasks:
-   - name: Flush previous rule on the port
-     command: iptables -F
    - name: Delete IP Table rules on specified ports
      command: iptables -D INPUT  -p tcp --dport {{ item }} -j REJECT
      with_items:
